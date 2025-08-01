@@ -11,16 +11,16 @@ const membershipRouter = require("./routes/membership");
 const newMessageRouter = require("./routes/newMessage");
 
 const app = express();
+const assetsPath = path.join(__dirname, "public");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-const assetsPath = path.join(__dirname, "public");
 
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: false }));
-app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(assetsPath))
+app.use(express.static(assetsPath));
 
 // Define middleware functions
 app.use("/", indexRouter);

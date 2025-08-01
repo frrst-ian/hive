@@ -9,13 +9,10 @@
     <% if(typeof errors!=='undefined' && errors.length > 0) { %>
     <div class="errors">
       <% errors.forEach(function(error) {%>
-      <p style="color: red"> <%=error.msg%> </p>
-
+      <p style="color: red"><%=error.msg%></p>
       <%}) %>
     </div>
-
     <% } %>
-
     <h1>Create New Message</h1>
     <form action="/new-message" method="POST">
       <label for="title">Title</label>
@@ -26,7 +23,6 @@
         value="<%= typeof formData !== 'undefined' ? formData.title:'' %>"
         required
       />
-
       <label for="text">Message</label>
       <textarea
         name="text"
@@ -35,7 +31,6 @@
         value="<%= typeof formData !== 'undefined' ? formData.text:'' %>"
         required
       ></textarea>
-
       <button type="submit">Create Message</button>
     </form>
   </body>
