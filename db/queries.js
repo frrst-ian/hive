@@ -1,9 +1,10 @@
 const pool = require("./pool");
 
 async function signUp(firstName, lastName, email, hashedPassword) {
-    await pool.query('INSERT INTO users(first_name, last_name, email,password) VALUES($1,$2,$3,$4)', [
+    const result = await pool.query('INSERT INTO users(first_name, last_name, email,password) VALUES($1,$2,$3,$4) RETURNING *', [
         firstName, lastName, email, hashedPassword,
     ]);
+    return result.rows[0];
 }
 
 async function getUserByEmail(email) {
@@ -11,4 +12,15 @@ async function getUserByEmail(email) {
     const result = await pool.query(query, [email]);
     return result.rows[0];
 }
-module.exports = { signUp ,getUserByEmail};
+
+async function updateMembership(id) {
+    const query = "UPDATE users SET membership_status = 'premium' WHERE id = $1";
+    await pool.query(query, [id]);
+}
+
+async function getUserById(id) {
+    const query = "SELECT * FROM users WHERE id = $1"
+    const result = await pool.query(query, [id]);
+    return result.rows[0];
+}
+module.exports = { signUp, getUserByEmail, getUserById, updateMembership };

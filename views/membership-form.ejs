@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Hive</title>
+  </head>
+  <body>
+    <h1>Join Hive</h1>
+    <% if(typeof error !== 'undefined') {%>
+    <p><%= error%></p>
+    <% }%>
+    <form action="/membership" method="POST">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" />
+      <button>Submit</button>
+      <a href="/">Cancel</a>
+    </form>
+  </body>
+</html>

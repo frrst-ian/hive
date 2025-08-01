@@ -6,6 +6,25 @@
     <title>Home</title>
   </head>
   <body>
-    <h1><%=message%></h1>
+    <% if(locals.user){ %>
+    <h1>Welcome back <%=user.first_name %></h1>
+    <a href="/new-message">Create a new message</a>
+    <a href="/log-out">LOG OUT</a>
+    <% } else { %>
+
+    <h1>please log in</h1>
+    <form action="/log-in" method="POST">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="email" />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="password"
+      />
+      <button type="submit">Log In</button>
+    </form>
+    <%} %>
   </body>
 </html>

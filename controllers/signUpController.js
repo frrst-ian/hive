@@ -59,9 +59,9 @@ async function signUpHandler(req, res, next) {
         const firstName = req.body.firstName;
         const lastName = req.body.lastName;
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-        await db.signUp(firstName, lastName, email, hashedPassword);
-        res.redirect("/");
+        const newUser = await db.signUp(firstName, lastName, email, hashedPassword);
+        req.session.userId = newUser.id;
+        res.redirect("/membership");
     } catch (error) {
         console.error(error);
         next(error);
