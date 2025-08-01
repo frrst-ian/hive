@@ -7,9 +7,7 @@ const bcrypt = require('bcryptjs');
 passport.use(
     new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
         try {
-            console.log('Strategy called with:', email);
             const user = await db.getUserByEmail(email)
-            console.log('User found:', user);
 
             if (!user) {
                 return done(null, false, { message: "Incorrect email" });
@@ -32,9 +30,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
     try {
-        console.log('Deserializing user:', id);
         const user = await db.getUserById(id);
-        console.log('Found user:', user);
         done(null, user);
     } catch (err) {
         console.error(err);

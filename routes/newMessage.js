@@ -3,7 +3,6 @@ const newMessageRouter = Router();
 const newMessageController = require("../controllers/newMessageController");
 
 newMessageRouter.get("/" , newMessageController.renderNewMessageForm);
-newMessageRouter.post("/" , newMessageController.newMessageHandler);
-
+newMessageRouter.post("/" ,newMessageController.messageValidation, newMessageController.newMessageHandler);
 
 module.exports = newMessageRouter;
