@@ -23,4 +23,12 @@ async function getUserById(id) {
     const result = await pool.query(query, [id]);
     return result.rows[0];
 }
-module.exports = { signUp, getUserByEmail, getUserById, updateMembership };
+
+// Insert new message into db 
+async function addNewMessage(title, text, created_at, id) {
+    await pool.query("INSERT INTO posts(title,text,created_at,id) VALUES($1,$2,$3,$4)", [
+        title, text, created_at, id
+    ])
+
+}
+module.exports = { signUp, getUserByEmail, getUserById, updateMembership, addNewMessage };
