@@ -6,13 +6,35 @@
     <title>New Message</title>
   </head>
   <body>
+    <% if(typeof errors!=='undefined' && errors.length > 0) { %>
+    <div class="errors">
+      <% errors.forEach(function(error) {%>
+      <p style="color: red"> <%=error.msg%> </p>
+
+      <%}) %>
+    </div>
+
+    <% } %>
+
     <h1>Create New Message</h1>
     <form action="/new-message" method="POST">
       <label for="title">Title</label>
-      <input type="text" name="title" id="title" required />
+      <input
+        type="text"
+        name="title"
+        id="title"
+        value="<%= typeof formData !== 'undefined' ? formData.title:'' %>"
+        required
+      />
 
       <label for="text">Message</label>
-      <textarea name="text" id="text" rows="5" required></textarea>
+      <textarea
+        name="text"
+        id="text"
+        rows="5"
+        value="<%= typeof formData !== 'undefined' ? formData.text:'' %>"
+        required
+      ></textarea>
 
       <button type="submit">Create Message</button>
     </form>
