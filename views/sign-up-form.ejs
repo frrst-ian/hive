@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <h1>hello world!</h1>
+    <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+    <div class="errors">
+      <% errors.forEach(function(error) { %>
+      <p style="color: red"><%= error.msg %></p>
+      <% }) %>
+    </div>
+    <% } %>
+    <form action="/sign-up" method="POST">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        placeholder="First Name"
+        value="<%= typeof formData !== 'undefined' ? formData.firstName: ''%>"
+        required
+      />
+
+      <label for="lastName">Last name</label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        placeholder="Last Name"
+        value="<%= typeof formData !== 'undefined' ? formData.lastName: ''%>"
+      />
+
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="email"
+        value="<%= typeof formData !== 'undefined' ? formData.email: ''%>"
+        required
+      />
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" />
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        name="confirmPassword"
+        id="confirmPassword"
+        required
+      />
+
+      <button type="submit">Sign Up</button>
+    </form>
+  </body>
+</html>

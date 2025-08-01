@@ -4,9 +4,9 @@ const path = require("node:path");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const bcrypt = require("bcryptjs");
 
 const indexRouter = require("./routes/index");
+const signUpRouter = require("./routes/signUp");
 const PORT = process.env.PORT || 3000;
 
 const app = express();
@@ -23,6 +23,8 @@ app.use(express.static(assetsPath))
 
 // Define middleware functions
 app.use("/", indexRouter);
+app.use("/sign-up", signUpRouter);
+
 
 
 app.listen(PORT, () => console.log(`app is listening on port ${PORT}`));
