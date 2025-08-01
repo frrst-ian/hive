@@ -6,12 +6,11 @@ async function newMessageHandler(req, res) {
     }
 
     const userId = req.session.userId;
-    const user = await db.getUserById(userId);
 
-    const {title,text} = req.body;
+    const { title, text } = req.body;
     const created_at = new Date();
 
-    await db.addNewMessage(req.user.id, title, text, created_at);
+    await db.addNewMessage(title, text, created_at, req.user.id);
     res.redirect("/");
 }
 

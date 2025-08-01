@@ -25,9 +25,9 @@ async function getUserById(id) {
 }
 
 // Insert new message into db 
-async function addNewMessage(title, text, created_at, id) {
-    await pool.query("INSERT INTO posts(title,text,created_at,id) VALUES($1,$2,$3,$4)", [
-        title, text, created_at, id
+async function addNewMessage(title, content, created_at, user_id) {
+    await pool.query("INSERT INTO posts(title,content,created_at,user_id) VALUES($1,$2,$3,$4)", [
+        title, content, created_at, user_id
     ])
 
 }
