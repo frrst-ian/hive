@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
 const membershipRouter = require("./routes/membership");
+const newMessageRouter = require("./routes/newMessage");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(assetsPath))
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/membership", membershipRouter);
+app.use("/new-message", newMessageRouter);
 
 app.post(
   "/log-in",
@@ -42,8 +44,5 @@ app.get("/log-out", (req, res, next) => {
     res.redirect("/");
   });
 });
-
-
-
 
 app.listen(PORT, () => console.log(`app is listening on port ${PORT}`));
