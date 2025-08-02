@@ -9,43 +9,39 @@
 
 <body>
   <% if (locals.user) { %>
-  <h1>Welcome back
-    <%= user.first_name %>
-  </h1>
+  <h1>Welcome back <%= user.first_name %></h1>
   <a href="/new-message">Create a new message</a>
   <a href="/log-out">LOG OUT</a>
   <% if (messages.length === 0) { %>
   <p>No messages at this moment.</p>
   <% } %>
   <% messages.forEach(msg => { %>
-  <% if (locals.user.membership_status == 'premium') { %>
-  <h3>
-    <%= msg.first_name %>
-    <%= msg.last_name %>
-  </h3>
-  <p>
-    <%= msg.created_at %>
-  </p>
-  <h4>
-    <%= msg.title %>
-  </h4>
-  <p>
-    <%= msg.content %>
-  </p>
+  <% if (locals.user.membership_status == 'admin') { %>
+  <h3><%= msg.first_name %> <%= msg.last_name %></h3>
+  <p><%= msg.created_at %></p>
+  <h4><%= msg.title %></h4>
+  <p><%= msg.content %></p>
+  <button>Delete Message</button>
+  <% } else if (locals.user.membership_status == 'premium')  { %>
+  <h3><%= msg.first_name %> <%= msg.last_name %></h3>
+  <p><%= msg.created_at %></p>
+  <h4><%= msg.title %></h4>
+  <p><%= msg.content %></p>
   <% } else { %>
-  <h4>
-    <%= msg.title %>
-  </h4>
-  <p>
-    <%= msg.content %>
-  </p>
+  <h4><%= msg.title %></h4>
+  <p><%= msg.content %></p>
+
   <% } %>
   <% }) %>
+
   <% } else { %>
   <h1>please log in</h1>
-  <form action="/log-in" method="POST"> <label for="email">Email</label>
+  <form action="/log-in" method="POST">
+    <label for="email">Email</label>
     <input type="email" name="email" id="email" placeholder="email" />
-    <label for="password">Password</label> <input type="password" id="password" name="password" placeholder="password" /> <button type="submit">Log In</button>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="password" />
+    <button type="submit">Log In</button>
   </form>
   <% } %>
 </body>
