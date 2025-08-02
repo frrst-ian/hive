@@ -17,7 +17,7 @@ async function membershipHandler(req, res, next) {
             return res.redirect("/");
         }
 
-        await db.updateMembership(userId);
+        await db.updateToPremium(userId);
         res.redirect("/");
     } catch (error) {
         next(error);
