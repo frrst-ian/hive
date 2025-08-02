@@ -1,20 +1,7 @@
 const db = require("../db/queries");
 const adminPassword = process.env.ADMIN_PASSWORD;
 
-async function renderAdminForm(req, res) {
-    try {
-        const userId = req.user.id;
-        const user = db.getUserById(userId);
-        if (user.membership_status == 'admin') {
-            res.redirect("/");
-        }
-        res.render("admin-form");
-    } catch (error) {
-        res.status(500).send("Internal Server Error");
-    }
-}
-
-async function adminHandler(res, req, next) {
+async function adminHandler(req, res, next) {
     try {
         const userId = req.user.id;
         const password = req.body.password;
@@ -25,15 +12,29 @@ async function adminHandler(res, req, next) {
 
         const user = await db.getUserById(userId);
 
-        if (user.membership_status = 'admin') {
+        if (user.membership_status === 'admin') {
             res.redirect("/");
         }
 
-        await db.updateMembership(userId);
+        await db.updateToAdmin(userId);
         res.redirect("/")
     } catch (error) {
         next(error);
     }
 }
+
+async function renderAdminForm(req, res) {
+    try {
+        const userId = req.user.id;
+        const user = await db.getUserById(userId);
+        if (user.membership_status === 'admin') {
+            res.redirect("/");
+        }
+        res.render("admin-form");
+    } catch (error) {
+        res.status(500).send("Internal Server Error");
+    }
+}
+
 
 module.exports = { renderAdminForm, adminHandler };
