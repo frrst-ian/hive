@@ -3,7 +3,7 @@ const secretPassword = process.env.SECRET_PASSWORD;
 
 async function membershipHandler(req, res, next) {
     try {
-        const userId = req.session.userId;
+        const userId = req.user.id;
         const password = req.body.password;
 
         if (password !== secretPassword) {
@@ -25,9 +25,9 @@ async function membershipHandler(req, res, next) {
 }
 
 async function renderMembershipForm(req, res) {
-    const userId = req.session.userId;
+    const userId = req.user.id;
     const user = await db.getUserById(userId);
-
+    console.log(user);
     if (user.membership_status === 'premium') {
         return res.redirect("/");
     }
