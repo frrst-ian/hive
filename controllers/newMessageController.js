@@ -10,7 +10,6 @@ const messageValidation = [
 
     body("text")
         .trim()
-        .escape()
         .isLength({ min: 1, max: 1000 })
         .withMessage("Message must be at least 1-1000 characters")
 ]
