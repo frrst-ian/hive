@@ -27,7 +27,6 @@ async function membershipHandler(req, res, next) {
 async function renderMembershipForm(req, res) {
     const userId = req.user.id;
     const user = await db.getUserById(userId);
-    console.log(user);
     if (user.membership_status === 'premium') {
         return res.redirect("/");
     }

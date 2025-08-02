@@ -3,6 +3,11 @@ const adminPassword = process.env.ADMIN_PASSWORD;
 
 async function renderAdminForm(req, res) {
     try {
+        const userId = req.user.id;
+        const user = db.getUserById(userId);
+        if (user.membership_status == 'admin') {
+            res.redirect("/");
+        }
         res.render("admin-form");
     } catch (error) {
         res.status(500).send("Internal Server Error");
