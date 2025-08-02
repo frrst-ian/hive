@@ -5,10 +5,12 @@ const session = require("express-session");
 const passport = require('./config/passport');
 const PORT = process.env.PORT || 3000;
 
+// Define routers
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
 const membershipRouter = require("./routes/membership");
 const newMessageRouter = require("./routes/newMessage");
+const adminRouter = require("./routes/admin");
 
 const app = express();
 const assetsPath = path.join(__dirname, "public");
@@ -27,6 +29,7 @@ app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/membership", membershipRouter);
 app.use("/new-message", newMessageRouter);
+app.use("/admin", adminRouter);
 
 app.post(
   "/log-in",
