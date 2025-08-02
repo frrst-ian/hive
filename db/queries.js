@@ -29,7 +29,24 @@ async function addNewMessage(title, content, created_at, user_id) {
     await pool.query("INSERT INTO posts(title,content,created_at,user_id) VALUES($1,$2,$3,$4)", [
         title, content, created_at, user_id
     ])
-
 }
 
-module.exports = { signUp, getUserByEmail, getUserById, updateMembership, addNewMessage };
+async function getAllMessages() {
+    const query =
+        `SELECT
+	        p.id,
+	        u.first_name,
+	        u.last_name,
+	        p.user_id,
+	        p.title,
+	        p.content,
+	        p.created_at
+        FROM 
+	        posts p 
+        INNER JOIN users u on p.user_id = u.id
+        ORDER BY p.created_at DESC;`
+    const { rows } = await pool.query(query)
+    return rows;
+}
+
+module.exports = { signUp, getUserByEmail, getUserById, updateMembership, addNewMessage, getAllMessages };
