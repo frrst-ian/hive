@@ -11,6 +11,7 @@
   <% if (locals.user) { %>
   <h1>Welcome back <%= user.first_name %></h1>
   <a href="/new-message">Create a new message</a>
+  <a href="/admin">Im Admin Bitch</a>
   <a href="/log-out">LOG OUT</a>
   <% if (messages.length === 0) { %>
   <p>No messages at this moment.</p>
@@ -21,7 +22,10 @@
   <p><%= msg.created_at %></p>
   <h4><%= msg.title %></h4>
   <p><%= msg.content %></p>
-  <button>Delete Message</button>
+  <form action="/delete" method="POST" style="display:inline;">
+    <input type="hidden" name="messageId" value="<%= msg.id %>">
+    <button type="submit">Delete</button>
+  </form>
   <% } else if (locals.user.membership_status == 'premium')  { %>
   <h3><%= msg.first_name %> <%= msg.last_name %></h3>
   <p><%= msg.created_at %></p>

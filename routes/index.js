@@ -3,5 +3,6 @@ const indexRouter = Router();
 const indexController = require("../controllers/indexController");
 
 indexRouter.get("/", indexController.getIndex);
+indexRouter.post("/delete", indexController.deleteMessageHandler);
 
 module.exports = indexRouter;
