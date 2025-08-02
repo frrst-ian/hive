@@ -13,8 +13,13 @@ async function getUserByEmail(email) {
     return result.rows[0];
 }
 
-async function updateMembership(id) {
+async function updateToPremium(id) {
     const query = "UPDATE users SET membership_status = 'premium' WHERE id = $1";
+    await pool.query(query, [id]);
+}
+
+async function updateToAdmin(id) {
+    const query = "UPDATE users SET membership_status = 'admin' WHERE id = $1";
     await pool.query(query, [id]);
 }
 
@@ -49,4 +54,8 @@ async function getAllMessages() {
     return rows;
 }
 
-module.exports = { signUp, getUserByEmail, getUserById, updateMembership, addNewMessage, getAllMessages };
+async function deleteMessage(messageId) {
+    await pool.query("DELETE FROM posts WHERE id = $1", [messageId])
+}
+
+module.exports = { signUp, getUserByEmail, getUserById, updateToAdmin,updateToPremium, addNewMessage, getAllMessages,deleteMessage };
