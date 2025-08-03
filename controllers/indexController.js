@@ -1,9 +1,9 @@
 const db = require("../db/queries");
 
-async function getIndex(req, res) {
+async function getAllMessages(req, res) {
     try {
         const messages = await db.getAllMessages();
-        res.render("index", { user: req.user, messages, author: "Say my name" });
+        res.render("index", { user: req.user, messages, author: "Say my name",errors:req.flash() });
     } catch (error) {
         res.status(500).send("Server Error");
     }
@@ -22,4 +22,4 @@ async function deleteMessageHandler(req, res, next) {
     }
 }
 
-module.exports = { getIndex, deleteMessageHandler };
+module.exports = { getAllMessages, deleteMessageHandler };
