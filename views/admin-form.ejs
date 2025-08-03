@@ -4,20 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
   <title>Admin Auth </title>
 </head>
 
 <body>
-  <h1>Log In as Admin</h1>
-  <% if(typeof error !== 'undefined') { %>
-  <p><%=error%></p>
-  <% } %>
-  <form action="/admin" method="POST">
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" />
-    <button type="submit">Log In</button>
-    <a href="/">Cancel</a>
-  </form>
+  <main>
+    <section>
+      <form class="form-container" action="/admin" method="POST">
+        <p class="title">Log In as Admin</p>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <div class="errors">
+          <% if(typeof error !== 'undefined') { %>
+          <p class="error"><%=error%></p>
+          <% } %>
+        </div>
+        <button class="sign" type="submit">Log In</button>
+        <a class="back-btn" href="/">Cancel</a>
+      </form>
+    </section>
+  </main>
 </body>
 
 </html>

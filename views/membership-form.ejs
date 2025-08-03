@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join Hive</title>
-  </head>
-  <body>
-    <h1>Join Hive</h1>
-    <% if(typeof error !== 'undefined') {%>
-    <p><%= error%></p>
-    <% }%>
-    <form action="/membership" method="POST">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" />
-      <button>Submit</button>
-      <a href="/">Cancel</a>
-    </form>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles.css">
+  <title>Join Hive</title>
+</head>
+
+<body>
+  <main>
+    <section>
+      <% if(typeof error !== 'undefined') {%>
+      <p><%= error%></p>
+      <% }%>
+      <form class="form-container" action="/membership" method="POST">
+        <p class="title">Join Hive</p>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <button class="sign">Join</button>
+        <a class="back-btn" href="/">Cancel</a>
+      </form>
+    </section>
+  </main>
+</body>
+
 </html>

@@ -14,7 +14,9 @@
       <% if (locals.user) { %>
       <h1>Welcome back <%= user.first_name %></h1>
       <a href="/new-message">Create a new message</a>
+      <% if (locals.user.membership_status !== 'admin' ) {%>
       <a href="/admin">Log In as Admin</a>
+      <% } %>
       <a href="/log-out">LOG OUT</a>
       <% if (messages.length === 0) { %>
       <p>No messages at this moment.</p>
@@ -26,7 +28,7 @@
       </p>
       <p><%= msg.created_at %></p>
       <h4 class="msg-title"><%- msg.title %></h4>
-      <p class="msg"><%= msg.content %></p>
+      <p class="msg"><%- msg.content %></p>
       <form action="/delete" method="POST" style="display:inline;">
         <input type="hidden" name="messageId" value="<%= msg.id %>">
         <button type="submit">Delete</button>
@@ -37,11 +39,11 @@
       </p>
 
       <p><%= msg.created_at %></p>
-      <h4><%= msg.title %></h4>
-      <p><%= msg.content %></p>
+      <h4><%- msg.title %></h4>
+      <p><%- msg.content %></p>
       <% } else { %>
-      <h4><%= msg.title %></h4>
-      <p><%= msg.content %></p>
+      <h4><%- msg.title %></h4>
+      <p><%- msg.content %></p>
 
       <% } %>
       <% }) %>
