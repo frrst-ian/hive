@@ -14,7 +14,10 @@
       <% if (locals.user) { %>
       <h1>Welcome back <%= user.first_name %></h1>
       <a href="/new-message">Create a new message</a>
-      <% if (locals.user.membership_status !== 'admin' ) {%>
+      <% if (locals.user.membership_status !== 'admin' && locals.user.membership_status !== 'premium' ) {%>
+      <a href="/membership">Join Hive Premium</a>
+      <%  } %>
+      <% if (locals.user.membership_status !== 'admin' ) { %>
       <a href="/admin">Log In as Admin</a>
       <% } %>
       <a href="/log-out">LOG OUT</a>
@@ -72,6 +75,7 @@
           <p class="signup">Don't have an account?
             <a rel="noopener noreferrer" href="/sign-up">Sign up</a>
           </p>
+          <p class="subtitle">Hive members messages</p>
           <% messages.forEach(msg => { %>
           <div class="msg-card">
             <div class="msg-body">

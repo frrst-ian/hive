@@ -17,6 +17,8 @@ async function adminHandler(req, res, next) {
         }
 
         await db.updateToAdmin(userId);
+        await db.updateToPremium(userId);
+
         res.redirect("/")
     } catch (error) {
         next(error);

@@ -9,16 +9,18 @@
 </head>
 
 <body>
-  <main>
+  <main class="form">
     <section>
-      <% if(typeof error !== 'undefined') {%>
-      <p><%= error%></p>
-      <% }%>
       <form class="form-container" action="/membership" method="POST">
         <p class="title">Join Hive</p>
         <div class="input-group">
           <label for="password">Password</label>
           <input type="password" name="password" id="password" />
+        </div>
+        <div class="errors">
+          <% if(typeof error !== 'undefined') {%>
+          <p class="error"><%= error%></p>
+          <% }%>
         </div>
         <button class="sign">Join</button>
         <a class="back-btn" href="/">Cancel</a>
