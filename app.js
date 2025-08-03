@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const path = require("node:path");
+const flash = require('connect-flash');
 const session = require("express-session");
 const passport = require('./config/passport');
 const PORT = process.env.PORT || 3000;
@@ -20,6 +21,7 @@ app.set("view engine", "ejs");
 
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: false }));
 app.use(passport.session());
+app.use(flash());
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(assetsPath));
@@ -35,7 +37,8 @@ app.post(
   "/log-in",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/"
+    failureRedirect: "/",
+    failureFlash: "Wrong email or password!"
   })
 );
 
