@@ -1,60 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
-  </head>
-  <body>
-    <h1>hello world!</h1>
-    <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
-    <div class="errors">
-      <% errors.forEach(function(error) { %>
-      <p style="color: red"><%= error.msg %></p>
-      <% }) %>
-    </div>
-    <% } %>
-    <form action="/sign-up" method="POST">
-      <label for="firstName">First Name</label>
-      <input
-        type="text"
-        id="firstName"
-        name="firstName"
-        placeholder="First Name"
-        value="<%= typeof formData !== 'undefined' ? formData.firstName: ''%>"
-        required
-      />
 
-      <label for="lastName">Last name</label>
-      <input
-        type="text"
-        id="lastName"
-        name="lastName"
-        placeholder="Last Name"
-        value="<%= typeof formData !== 'undefined' ? formData.lastName: ''%>"
-      />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css">
+  <title>Sign Up</title>
+</head>
 
-      <label for="email">Email</label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        placeholder="email"
-        value="<%= typeof formData !== 'undefined' ? formData.email: ''%>"
-        required
-      />
+<body>
+  <main>
+    <section>
+      <div class="form-container">
+        <p class="title">Join Hive</p>
+        <form class="form" action="/sign-up" method="POST">
+          <div class="input-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="" value="<%= typeof formData !== 'undefined' ? formData.firstName: ''%>" required />
+          </div>
+          <div class="input-group">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="" value="<%= typeof formData !== 'undefined' ? formData.lastName: ''%>" />
+          </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="" value="<%= typeof formData !== 'undefined' ? formData.email: ''%>" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <span class="pwd-reminder">*Use at least 6 characters with mixed letters, numbers, and symbols.</span>
+            <input type="password" name="password" id="password" />
+          </div>
+          <div class="input-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" required />
+          </div>
+          <button class="sign" type="submit">Sign Up</button>
+        </form>
+      </div>
 
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" />
+      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+      <div class="errors">
+        <% errors.forEach(function(error) { %>
+        <p style="color: red"><%= error.msg %></p>
+        <% }) %>
+      </div>
+      <% } %>
 
-      <label for="confirmPassword">Confirm Password</label>
-      <input
-        type="password"
-        name="confirmPassword"
-        id="confirmPassword"
-        required
-      />
-      <button type="submit" >Sign Up</button>
-    </form>
-  </body>
+    </section>
+  </main>
+</body>
+
 </html>

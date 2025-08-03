@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Mozilla%20Text:700|Mozilla%20Text:400");
-
+/* CSS reset */
 *,
 *::before,
 *::after {
@@ -121,12 +121,12 @@ section {
   place-items: center;
 }
 
+/* Log in page */
 .form-container {
   width: 20rem;
   border-radius: 0.75rem;
   background-color: var(--background);
   padding: 2rem;
-  color: rgba(243, 244, 246, 1);
 }
 
 .title {
@@ -134,6 +134,7 @@ section {
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
+  color: var(--text);
 }
 
 .form {
@@ -178,7 +179,7 @@ section {
   display: block;
   width: 100%;
   background-color: var(--primary);
-  padding: 0.75rem;
+  padding: 0.62rem;
   text-align: center;
   color: var(--background);
   border: none;
@@ -221,4 +222,12 @@ p.name {
   color: var(--secondary);
   font-size: 0.85em;
   font-weight: 600;
+}
+
+/* Sign up page */
+.pwd-reminder {
+    font-size: 0.7rem;
+    margin: 0rem;
+    font-style: italic;
+    color: whitesmoke;
 }
