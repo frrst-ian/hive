@@ -21,16 +21,21 @@
       <% } %>
       <% messages.forEach(msg => { %>
       <% if (locals.user.membership_status == 'admin') { %>
-      <h3><%= msg.first_name %> <%= msg.last_name %></h3>
+      <p class="name">
+        <%= msg.first_name %> <%= msg.last_name %>
+      </p>
       <p><%= msg.created_at %></p>
-      <h4><%= msg.title %></h4>
-      <p><%= msg.content %></p>
+      <h4 class="msg-title"><%- msg.title %></h4>
+      <p class="msg"><%= msg.content %></p>
       <form action="/delete" method="POST" style="display:inline;">
         <input type="hidden" name="messageId" value="<%= msg.id %>">
         <button type="submit">Delete</button>
       </form>
       <% } else if (locals.user.membership_status == 'premium')  { %>
-      <h3><%= msg.first_name %> <%= msg.last_name %></h3>
+      <p class="name">
+        <%= msg.first_name %> <%= msg.last_name %>
+      </p>
+
       <p><%= msg.created_at %></p>
       <h4><%= msg.title %></h4>
       <p><%= msg.content %></p>
@@ -58,9 +63,18 @@
             <a rel="noopener noreferrer" href="/sign-up">Sign up</a>
           </p>
           <% messages.forEach(msg => { %>
-          <h2><%= author %> </h2>
-          <h4><%= msg.title %></h4>
-          <p><%= msg.content %></p>
+          <div class="msg-card">
+            <div class="msg-body">
+              <p class="msg-title">
+                <%- msg.title %>
+              <p class="msg-content"><%- msg.content %></p>
+              </p>
+              <p class="name">
+                from: @<%= author %>
+              </p>
+            </div>
+          </div>
+
           <%})%>
         </form>
 
