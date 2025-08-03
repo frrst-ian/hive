@@ -226,8 +226,33 @@ p.name {
 
 /* Sign up page */
 .pwd-reminder {
-    font-size: 0.7rem;
-    margin: 0rem;
-    font-style: italic;
-    color: whitesmoke;
+  font-size: 0.7rem;
+  margin: 0rem;
+  font-style: italic;
+  color: whitesmoke;
+}
+
+a.back-btn {
+  margin-top: 0.8rem;
+  display: block;
+  width: 100%;
+  background-color: var(--secondary);
+  padding: 0.62rem;
+  text-align: center;
+  color: var(--text);
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Errors */
+.errors {
+  margin-top: 1rem;
+  color: #ff4545;
+}
+
+p.error {
+  font-size: 0.85rem;
+  font-style: italic;
 }

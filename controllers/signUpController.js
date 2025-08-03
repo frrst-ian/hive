@@ -24,7 +24,7 @@ const signUpValidation = [
         .custom(async (email) => {
             const existingUser = await db.getUserByEmail(email);
             if (existingUser) {
-                throw new Error("Email already exists");
+                throw new Error("*Email already exists");
 
             }
         }),
@@ -32,15 +32,15 @@ const signUpValidation = [
     body("password")
         .trim()
         .isLength({ min: 6 })
-        .withMessage("Password must be at least 6 characters")
+        .withMessage("*Password must be at least 6 characters")
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
-        .withMessage("Password must contain lowercase, uppercase, and number"),
+        .withMessage("*Password must contain lowercase, uppercase, and number"),
 
     body("confirmPassword")
         .trim()
         .custom((value, { req }) => {
             if (value !== req.body.password) {
-                throw new Error("Password do not match");
+                throw new Error("*Password do not match");
             }
             return true;
         })
