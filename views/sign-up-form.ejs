@@ -19,7 +19,7 @@
             <input type="text" id="firstName" name="firstName" placeholder="" value="<%= typeof formData !== 'undefined' ? formData.firstName: ''%>" required />
           </div>
           <div class="input-group">
-            <label for="lastName">Last name</label>
+            <label for="lastName">Last Name</label>
             <input type="text" id="lastName" name="lastName" placeholder="" value="<%= typeof formData !== 'undefined' ? formData.lastName: ''%>" />
           </div>
           <div class="input-group">
@@ -28,24 +28,27 @@
           </div>
           <div class="input-group">
             <label for="password">Password</label>
-            <span class="pwd-reminder">*Use at least 6 characters with mixed letters, numbers, and symbols.</span>
+            <span class="pwd-reminder">*Use at least 6 characters with uppercase & lowercase letters, numbers, and symbols.</span>
             <input type="password" name="password" id="password" />
           </div>
           <div class="input-group">
             <label for="confirmPassword">Confirm Password</label>
             <input type="password" name="confirmPassword" id="confirmPassword" required />
           </div>
+          <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+          <div class="errors">
+            <% errors.forEach(function(error) { %>
+            <p class="error"><%= error.msg %></p>
+            <% }) %>
+          </div>
+          <% } %>
           <button class="sign" type="submit">Sign Up</button>
+          <a href="/" class="back-btn">Go back</a>
+
         </form>
       </div>
 
-      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
-      <div class="errors">
-        <% errors.forEach(function(error) { %>
-        <p style="color: red"><%= error.msg %></p>
-        <% }) %>
-      </div>
-      <% } %>
+
 
     </section>
   </main>
