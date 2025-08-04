@@ -331,7 +331,7 @@ p.timestamp {
 
 html,
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 16px;
 }
 
@@ -387,10 +387,23 @@ ul.navUL li a {
 }
 
 ul.navUL li a:hover {
-  color: #000000;
+  color: var(--primary);
   text-decoration: none;
 }
 
 nav {
-    margin: 1rem 0rem 0rem 1.5rem;
+  margin: 1rem 0rem 0rem 1.5rem;
+}
+
+/* Footer */
+footer {
+  padding: 0.6rem;
+  background-color: #1a1a18;
+  display: grid;
+  place-items: center;
+  margin-top: 1rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
