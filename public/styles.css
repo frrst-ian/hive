@@ -309,6 +309,11 @@ p.subtitle {
 }
 
 /* Home */
+.msg-group {
+  display: flex;
+  gap: 0.85rem;
+}
+
 p.main-msg {
   margin-top: 1.5rem;
   font-size: 1.3rem;
@@ -422,4 +427,10 @@ footer {
   background-color: #1a1a18;
   display: grid;
   place-items: center;
+}
+
+/* SVG */
+svg#Layer_1 {
+  width: 2rem;
+  margin-top: 1rem;
 }
