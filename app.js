@@ -32,7 +32,7 @@ app.use("/sign-up", signUpRouter);
 app.use("/membership", membershipRouter);
 app.use("/new-message", newMessageRouter);
 app.use("/admin", adminRouter);
-
+  
 app.post(
   "/log-in",
   passport.authenticate("local", {

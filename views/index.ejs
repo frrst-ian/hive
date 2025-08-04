@@ -9,90 +9,113 @@
 </head>
 
 <body>
-  <main>
+  <% if (locals.user) { %>
+  <header>
+    <nav>
+      <label for="id-show-menu" class="show-menu">
+        <div class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu">
+            <path d="M4 12h16" />
+            <path d="M4 18h16" />
+            <path d="M4 6h16" />
+          </svg>
+        </div>
+      </label>
+      <input type="checkbox" id="id-show-menu" class="checkbox-menu" role="button">
+      <div class="menu-block">
+        <ul class="navUL">
+          <li><a href="/new-message">New Message</a></li>
+          <li><a href="/log-out">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="home">
     <section>
-      <% if (locals.user) { %>
-      <h1>Welcome back <%= user.first_name %></h1>
-      <a href="/new-message">Create a new message</a>
+      <p class="main-msg">Welcome to Hive <%= locals.user.first_name%> </p>
       <% if (locals.user.membership_status !== 'admin' && locals.user.membership_status !== 'premium' ) {%>
       <a href="/membership">Join Hive Premium</a>
       <%  } %>
       <% if (locals.user.membership_status !== 'admin' ) { %>
       <a href="/admin">Log In as Admin</a>
       <% } %>
-      <a href="/log-out">LOG OUT</a>
       <% if (messages.length === 0) { %>
-      <p>No messages at this moment.</p>
+      <p class="fall-back-msg">No messages at this moment.</p>
       <% } %>
       <% messages.forEach(msg => { %>
       <% if (locals.user.membership_status == 'admin') { %>
-      <p class="name">
-        <%= msg.first_name %> <%= msg.last_name %>
-      </p>
-      <p><%= msg.created_at %></p>
-      <h4 class="msg-title"><%- msg.title %></h4>
-      <p class="msg"><%- msg.content %></p>
-      <form action="/delete" method="POST" style="display:inline;">
-        <input type="hidden" name="messageId" value="<%= msg.id %>">
-        <button type="submit">Delete</button>
-      </form>
+      <div class="msg-card">
+        <div class="msg-body">
+          <p class="msg-title"><%- msg.title %></p>
+          <p class="msg-content"><%- msg.content %></p>
+          <p class="timestamp"><%= msg.created_at %></p>
+          <p class="name">
+            from: @<%= msg.first_name %> <%= msg.last_name %>
+          </p>
+        </div>
+        <form action="/delete" method="POST" style="display:inline;">
+          <input type="hidden" name="messageId" value="<%= msg.id %>">
+          <button class="del-btn" type="submit">Delete</button>
+        </form>
+      </div>
       <% } else if (locals.user.membership_status == 'premium')  { %>
       <p class="name">
         <%= msg.first_name %> <%= msg.last_name %>
       </p>
 
-      <p><%= msg.created_at %></p>
-      <h4><%- msg.title %></h4>
-      <p><%- msg.content %></p>
+      <p class="timestamp"><%= msg.created_at %></p>
+      <p class="msg-title"><%- msg.title %></p>
+      <p class="msg-content"><%- msg.content %></p>
       <% } else { %>
-      <h4><%- msg.title %></h4>
-      <p><%- msg.content %></p>
-
+      <p class="msg-title"><%- msg.title %></p>
+      <p class="msg-content"><%- msg.content %></p>
       <% } %>
       <% }) %>
 
       <% } else { %>
-      <div class="form-container">
-        <p class="title">Login</p>
-        <form class="form" action="/log-in" method="POST">
-          <div class="input-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="" />
-          </div>
-          <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="" />
-          </div>
-          <% if (errors.error && errors.error.length > 0) { %>
-          <div class="errors">
-            <% errors.error.forEach(function(message) { %>
-            <p class="error"><%= message %></p>
-            <% }); %>
-          </div>
-          <% } %>
-
-          <button class="sign" type="submit">Sign in</button>
-          <p class="signup">Don't have an account?
-            <a rel="noopener noreferrer" href="/sign-up">Sign up</a>
-          </p>
-          <p class="subtitle">Hive members messages</p>
-          <% messages.forEach(msg => { %>
-          <div class="msg-card">
-            <div class="msg-body">
-              <p class="msg-title">
-                <%- msg.title %>
-              <p class="msg-content"><%- msg.content %></p>
+      <main class="home">
+        <section>
+          <div class="form-container">
+            <p class="title">Login</p>
+            <form class="form" action="/log-in" method="POST">
+              <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="" />
+              </div>
+              <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="" />
+              </div>
+              <% if (errors.error && errors.error.length > 0) { %>
+              <div class="errors">
+                <% errors.error.forEach(function(message) { %>
+                <p class="error"><%= message %></p>
+                <% }); %>
+              </div>
+              <% } %>
+              <button class="sign" type="submit">Sign in</button>
+              <p class="signup">Don't have an account?
+                <a rel="noopener noreferrer" href="/sign-up">Sign up</a>
               </p>
-              <p class="name">
-                from: @<%= author %>
-              </p>
-            </div>
+              <p class="subtitle">Hive members messages</p>
+              <% messages.forEach(msg => { %>
+              <div class="msg-card">
+                <div class="msg-body">
+                  <p class="msg-title">
+                    <%- msg.title %>
+                  <p class="msg-content"><%- msg.content %></p>
+                  </p>
+                  <p class="name">
+                    from: @<%= author %>
+                  </p>
+                </div>
+              </div>
+              <%})%>
+            </form>
           </div>
-
-          <%})%>
-        </form>
-
-      </div>
+        </section>
+      </main>
       <% } %>
 
     </section>
