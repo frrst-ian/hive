@@ -10,125 +10,138 @@
 
 <body>
   <% if (locals.user) { %>
-  <header>
-    <nav>
-      <label for="id-show-menu" class="show-menu">
-        <div class="nav-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu">
-            <path d="M4 12h16" />
-            <path d="M4 18h16" />
-            <path d="M4 6h16" />
-          </svg>
-        </div>
-      </label>
-      <input type="checkbox" id="id-show-menu" class="checkbox-menu" role="button">
-      <div class="menu-block">
-        <ul class="navUL">
-          <li><a href="/new-message">New Message</a></li>
-          <li><a href="/log-out">Logout</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-
-  <main class="home">
-    <section>
-      <p class="main-msg">Welcome to Hive <%= locals.user.first_name%> </p>
-      <% if (locals.user.membership_status !== 'admin' && locals.user.membership_status !== 'premium' ) {%>
-      <a href="/membership">Join Hive Premium</a>
-      <%  } %>
-      <% if (locals.user.membership_status !== 'admin' ) { %>
-      <a href="/admin">Log In as Admin</a>
-      <% } %>
-      <% if (messages.length === 0) { %>
-      <p class="fall-back-msg">No messages at this moment.</p>
-      <% } %>
-      <% messages.forEach(msg => { %>
-      <% if (locals.user.membership_status == 'admin') { %>
-      <div class="msg-card">
-        <div class="msg-body">
-          <p class="msg-title"><%- msg.title %></p>
-          <p class="msg-content"><%- msg.content %></p>
-          <p class="timestamp"><%= msg.created_at %></p>
-          <p class="name">
-            from: @<%= msg.first_name %> <%= msg.last_name %>
-          </p>
-        </div>
-        <form action="/delete" method="POST" style="display:inline;">
-          <input type="hidden" name="messageId" value="<%= msg.id %>">
-          <button class="del-btn" type="submit">Delete</button>
-        </form>
-      </div>
-      <% } else if (locals.user.membership_status == 'premium')  { %>
-      <p class="name">
-        <%= msg.first_name %> <%= msg.last_name %>
-      </p>
-
-      <p class="timestamp"><%= msg.created_at %></p>
-      <p class="msg-title"><%- msg.title %></p>
-      <p class="msg-content"><%- msg.content %></p>
-      <% } else { %>
-      <p class="msg-title"><%- msg.title %></p>
-      <p class="msg-content"><%- msg.content %></p>
-      <% } %>
-      <% }) %>
-
-      <% } else { %>
-      <main class="home">
-        <section>
-          <div class="form-container">
-            <p class="title">Login</p>
-            <form class="form" action="/log-in" method="POST">
-              <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="" />
-              </div>
-              <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="" />
-              </div>
-              <% if (errors.error && errors.error.length > 0) { %>
-              <div class="errors">
-                <% errors.error.forEach(function(message) { %>
-                <p class="error"><%= message %></p>
-                <% }); %>
-              </div>
-              <% } %>
-              <button class="sign" type="submit">Sign in</button>
-              <p class="signup">Don't have an account?
-                <a rel="noopener noreferrer" href="/sign-up">Sign up</a>
-              </p>
-              <p class="subtitle">Hive members messages</p>
-              <% messages.forEach(msg => { %>
-              <div class="msg-card">
-                <div class="msg-body">
-                  <p class="msg-title">
-                    <%- msg.title %>
-                  <p class="msg-content"><%- msg.content %></p>
-                  </p>
-                  <p class="name">
-                    from: @<%= author %>
-                  </p>
-                </div>
-              </div>
-              <%})%>
-            </form>
+  <div class="wrapper">
+    <header>
+      <nav>
+        <label for="id-show-menu" class="show-menu">
+          <div class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu">
+              <path d="M4 12h16" />
+              <path d="M4 18h16" />
+              <path d="M4 6h16" />
+            </svg>
           </div>
-        </section>
-      </main>
-      <% } %>
-    </section>
-  </main>
-  <footer>
-    <a href="https://github.com/frrst-ian/hive" target="_blank" rel="noopener noreferrer">
-      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github-icon lucide-github">
-        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-        <path d="M9 18c-4.51 2-5-2-7-2" />
+        </label>
+        <input type="checkbox" id="id-show-menu" class="checkbox-menu" role="button">
+        <div class="menu-block">
+          <ul class="navUL">
+            <li><a href="/new-message">New message</a></li>
+            <% if(locals.user.membership_status !== 'admin' && locals.user.membership_status !== 'premium') { %>
+            <li><a href="/membership">Join hive</a></li>
+            <li> <a href="/admin">Admin login </a></li>
+            <% } %>
 
-      </svg>
-    </a>
-    </div>
+            <li><a href="/log-out">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="home">
+      <section>
+        <p class="main-msg">Welcome to Hive <%= locals.user.first_name%> </p>
+        <% if( locals.user.membership_status === 'premium') { %>
+        <p class="membership-msg">You're a premium user</p>
+        <% } %>
+        <% if( locals.user.membership_status === 'basic') { %>
+        <p class="membership-msg">You're a basic user</p>
+        <p class="msg-2"><a class="join-lnk" href="/membership">Join hive</a> to view message author</p>
+        <% } %>
+        <% if (messages.length === 0) { %>
+        <p class="fall-back-msg">No messages at this moment.</p>
+        <% } %>
+        <% messages.forEach(msg => { %>
+        <% if (locals.user.membership_status == 'admin') { %>
+        <div class="msg-card">
+          <div class="msg-body">
+            <p class="msg-title"><%- msg.title %></p>
+            <p class="msg-content"><%- msg.content %></p>
+            <p class="timestamp"><%= msg.created_at %></p>
+            <p class="name">
+              from: @<%= msg.first_name %> <%= msg.last_name %>
+            </p>
+          </div>
+          <form action="/delete" method="POST" style="display:inline;">
+            <input type="hidden" name="messageId" value="<%= msg.id %>">
+            <button class="del-btn" type="submit">Delete</button>
+          </form>
+        </div>
+        <% } else if (locals.user.membership_status == 'premium')  { %>
+        <div class="msg-card">
+          <div class="msg-body">
+            <p class="msg-title"><%- msg.title %></p>
+            <p class="msg-content"><%- msg.content %></p>
+            <p class="timestamp"><%= msg.created_at %></p>
+            <p class="name">
+              <%= msg.first_name %> <%= msg.last_name %>
+            </p>
+            <% } else { %>
+            <div class="msg-card">
+              <div class="msg-body">
+                <p class="msg-title"><%- msg.title %></p>
+                <p class="msg-content"><%- msg.content %></p>
+                <p class="name">from: @<span class="blur-name"><%=author %></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+        <% }) %>
+        <% } else { %>
+        <main class="home">
+          <section>
+            <div class="form-container">
+              <p class="title">Login</p>
+              <form class="form" action="/log-in" method="POST">
+                <div class="input-group">
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="email" placeholder="" />
+                </div>
+                <div class="input-group">
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="password" placeholder="" />
+                </div>
+                <% if (errors.error && errors.error.length > 0) { %>
+                <div class="errors">
+                  <% errors.error.forEach(function(message) { %>
+                  <p class="error"><%= message %></p>
+                  <% }); %>
+                </div>
+                <% } %>
+                <button class="sign" type="submit">Sign in</button>
+                <p class="signup">Don't have an account?
+                  <a rel="noopener noreferrer" href="/sign-up">Sign up</a>
+                </p>
+                <p class="subtitle">Hive members messages</p>
+                <% messages.forEach(msg => { %>
+                <div class="msg-card">
+                  <div class="msg-body">
+                    <p class="msg-title">
+                      <%- msg.title %>
+                    <p class="msg-content"><%- msg.content %></p>
+                    </p>
+                    <p class="name">from: @<span class="blur-name"><%=author %></span>
+                    </p>
+                  </div>
+                </div>
+                <%})%>
+              </form>
+            </div>
+          </section>
+        </main>
+        <% } %>
+      </section>
+    </main>
+    <footer>
+      <a href="https://github.com/frrst-ian/hive" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github-icon lucide-github">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+          <path d="M9 18c-4.51 2-5-2-7-2" />
+        </svg>
+      </a>
+  </div>
   </footer>
+  </div>
 
 </body>
 
