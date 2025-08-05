@@ -249,6 +249,10 @@ p.name {
 }
 
 /* Sign up page */
+section.signup-page {
+  width: 400px;
+}
+
 .pwd-reminder {
   font-size: 0.7rem;
   margin: 0rem;
@@ -522,6 +526,10 @@ svg#Layer_1 {
     gap: 2rem;
   }
 
+  .msg-2 {
+  font-size: 1rem;
+}
+
   .msg-cards,
   .msg-cards.admin-msg-card {
     display: grid;
@@ -538,7 +546,7 @@ svg#Layer_1 {
     z-index: 5;
     border-radius: 10px;
     transition: 200ms ease-in-out;
-    color: var(--text); 
+    color: var(--text);
     display: grid;
     grid-template-rows: 1fr;
   }
