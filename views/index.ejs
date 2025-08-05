@@ -13,7 +13,20 @@
   <% if (locals.user) { %>
   <div class="wrapper">
     <header>
-      <nav>
+      <nav class="desktop">
+        <ul class="nav-ul">
+          <li><a  href="/new-message">New message</a></li>
+          <% if(locals.user.membership_status !== 'admin' && locals.user.membership_status !== 'premium') { %>
+          <li><a href="/membership">Join hive</a></li>
+          <li> <a href="/admin">Admin login </a></li>
+          <% } %>
+          <% if(locals.user.membership_status === 'premium') { %>
+          <li> <a href="/admin">Admin login </a></li>
+          <% } %>
+          <li><a href="/log-out">Logout</a></li>
+        </ul>
+      </nav>
+      <nav class="mobile">
         <label for="id-show-menu" class="show-menu">
           <div class="nav-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu">
@@ -117,10 +130,10 @@
               <p class="msg-title"><%- msg.title %></p>
               <p class="msg-content"><%- msg.content %></p>
             </div>
-              <div class="footer">
-                <p class="name">from: @<span class="blur-name"><%=author %></span>
-                </div>
-              </p>
+            <div class="footer">
+              <p class="name">from: @<span class="blur-name"><%=author %></span>
+            </div>
+            </p>
           </div>
           <% } %>
           <% }) %>
