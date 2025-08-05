@@ -78,50 +78,52 @@
         <% if (messages.length === 0) { %>
         <p class="fall-back-msg">No messages at this moment.</p>
         <% } %>
-        <% messages.forEach(msg => { %>
-        <% if (locals.user.membership_status == 'admin') { %>
-        <div class="msg-card">
-          <div class="msg-body">
-            <p class="msg-title"><%- msg.title %></p>
-            <p class="msg-content"><%- msg.content %></p>
-            <p class="timestamp"><%= msg.created_at %></p>
-            <p class="name">
-              from: @<%= msg.first_name %> <%= msg.last_name %>
-            </p>
+        <div class="msg-cards admin-msg-card">
+          <% messages.forEach(msg => { %>
+          <% if (locals.user.membership_status == 'admin') { %>
+          <div class="msg-card">
+            <div class="msg-body">
+              <p class="msg-title"><%- msg.title %></p>
+              <p class="msg-content"><%- msg.content %></p>
+              <p class="timestamp"><%= msg.created_at %></p>
+              <p class="name">
+                from: @<%= msg.first_name %> <%= msg.last_name %>
+              </p>
+            </div>
+            <form action="/delete" method="POST" style="display:inline;">
+              <input type="hidden" name="messageId" value="<%= msg.id %>">
+              <button class="del-btn" type="submit">Delete</button>
+            </form>
           </div>
-          <form action="/delete" method="POST" style="display:inline;">
-            <input type="hidden" name="messageId" value="<%= msg.id %>">
-            <button class="del-btn" type="submit">Delete</button>
-          </form>
-        </div>
-        <% } else if (locals.user.membership_status == 'premium')  { %>
-        <div class="msg-card">
-          <div class="msg-body">
-            <p class="msg-title"><%- msg.title %></p>
-            <p class="msg-content"><%- msg.content %></p>
-            <p class="timestamp"><%= msg.created_at %></p>
-            <p class="name">
-              <%= msg.first_name %> <%= msg.last_name %>
-            </p>
-            <% } else { %>
-            <div class="msg-card">
-              <div class="msg-body">
-                <p class="msg-title"><%- msg.title %></p>
-                <p class="msg-content"><%- msg.content %></p>
-                <p class="name">from: @<span class="blur-name"><%=author %></span>
-                </p>
-              </div>
+          <% } else if (locals.user.membership_status == 'premium')  { %>
+          <div class="msg-card">
+            <div class="msg-body">
+              <p class="msg-title"><%- msg.title %></p>
+              <p class="msg-content"><%- msg.content %></p>
+              <p class="timestamp"><%= msg.created_at %></p>
+              <p class="name">
+                <%= msg.first_name %> <%= msg.last_name %>
+              </p>
             </div>
           </div>
+          <% } else { %>
+          <div class="msg-card">
+            <div class="msg-body">
+              <p class="msg-title"><%- msg.title %></p>
+              <p class="msg-content"><%- msg.content %></p>
+              <p class="name">from: @<span class="blur-name"><%=author %></span>
+              </p>
+            </div>
+          </div>
+          <% } %>
+          <% }) %>
+          <% } else { %>
         </div>
-        <% } %>
-        <% }) %>
-        <% } else { %>
-        <main class="home">
-          <section>
-            <div class="form-container">
-              <p class="title">Login</p>
-              <form class="form" action="/log-in" method="POST">
+        <section>
+          <div class="form-container">
+            <p class="title">Login</p>
+            <form class="form" action="/log-in" method="POST">
+              <div class="login-group">
                 <div class="input-group">
                   <label for="email">Email</label>
                   <input type="email" name="email" id="email" placeholder="" required />
@@ -141,23 +143,25 @@
                 <p class="signup">Don't have an account?
                   <a rel="noopener noreferrer" href="/sign-up">Sign up</a>
                 </p>
-                <p class="subtitle">Hive members messages:</p>
-                <% messages.forEach(msg => { %>
-                <div class="msg-card">
-                  <div class="msg-body">
-                    <p class="msg-title">
-                      <%- msg.title %>
-                    <p class="msg-content"><%- msg.content %></p>
-                    </p>
-                    <p class="name">from: @<span class="blur-name"><%=author %></span>
-                    </p>
-                  </div>
+              </div>
+            </form>
+            <p class="subtitle">Hive members messages:</p>
+            <div class="msg-cards">
+              <% messages.forEach(msg => { %>
+              <div class="msg-card">
+                <div class="msg-body">
+                  <p class="msg-title">
+                    <%- msg.title %>
+                  <p class="msg-content"><%- msg.content %></p>
+                  </p>
+                  <p class="name">from: @<span class="blur-name"><%=author %></span>
+                  </p>
                 </div>
-                <%})%>
-              </form>
+              </div>
+              <%})%>
             </div>
-          </section>
-        </main>
+          </div>
+        </section>
         <% } %>
       </section>
     </main>
