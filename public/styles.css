@@ -450,7 +450,7 @@ svg#Layer_1 {
 }
 
 /* Desktop viewport */
-@media (min-width: 1024px) {
+@media (min-width: 800px) {
   .form-container {
     margin-top: 30px;
     width: 100%;
@@ -501,6 +501,27 @@ svg#Layer_1 {
     text-align: center;
   }
 
+  /* Welcome message */
+  svg#Layer_1 {
+    width: 4rem;
+    margin-top: 1rem;
+  }
+
+  p.membership-msg {
+    font-size: 1.3rem;
+  }
+
+  p.main-msg {
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: "Roboto Mono";
+  }
+
+  .msg-group {
+    gap: 2rem;
+  }
+
   .msg-cards,
   .msg-cards.admin-msg-card {
     display: grid;
@@ -517,7 +538,9 @@ svg#Layer_1 {
     z-index: 5;
     border-radius: 10px;
     transition: 200ms ease-in-out;
-    color: var(--text);
+    color: var(--text); 
+    display: grid;
+    grid-template-rows: 1fr;
   }
 
   p.msg-title {
