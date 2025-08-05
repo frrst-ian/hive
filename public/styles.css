@@ -70,7 +70,7 @@ h6 {
 :root {
   --text: #fefddc;
   --background: #131301;
-  --primary: #e7ef0b;
+  --primary: #f9ff62;
   --secondary: #00a55e;
   --accent: #3aaf08;
 }
@@ -370,7 +370,7 @@ body {
   height: 100%;
 }
 
-.show-menu {
+.show-menu , .del-btn{
   cursor: pointer;
 }
 
@@ -443,6 +443,15 @@ footer {
 svg#Layer_1 {
   width: 2rem;
   margin-top: 1rem;
+}
+
+.msg-title-wrapper {
+    display: flex;
+    gap: 12px;
+}
+
+nav.desktop {
+  display: none;
 }
 
 /* Desktop viewport */
