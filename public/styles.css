@@ -505,6 +505,11 @@ svg#Layer_1 {
     text-align: center;
   }
 
+  /* New Message Form */
+  textarea {
+    width: 320px;
+  }
+
   /* Welcome message */
   svg#Layer_1 {
     width: 4rem;
@@ -527,8 +532,8 @@ svg#Layer_1 {
   }
 
   .msg-2 {
-  font-size: 1rem;
-}
+    font-size: 1rem;
+  }
 
   .msg-cards,
   .msg-cards.admin-msg-card {
