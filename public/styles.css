@@ -206,16 +206,8 @@ section {
   color: rgba(156, 163, 175, 1);
 }
 
-/* .msg-cards {
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 300px;
-  gap: 1rem;
-  padding: 20px;
-} */
-
 .msg-cards.admin-msg-card {
-  width: 280px;
+  width: 300px;
 }
 
 .msg-card {
