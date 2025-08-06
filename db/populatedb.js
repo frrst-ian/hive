@@ -3,9 +3,34 @@ require('dotenv').config();
 const { Client } = require("pg");
 
 const SQL = `
--- Clear existing data
-DELETE FROM posts;
-DELETE FROM users;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS posts CASCADE;
+
+
+CREATE TABLE users (
+id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50),
+email VARCHAR(50) NOT NULL UNIQUE,
+password VARCHAR(255) NOT NUll,
+membership_status VARCHAR(50) DEFAULT 'active',
+created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE posts (
+id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+user_id INTEGER NOT NULL,
+title VARCHAR(255) NOT NULL,
+content TEXT,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_posts_user_id ON posts(user_id);
+CREATE INDEX idx_posts_created_at ON posts(created_at);
+CREATE INDEX idx_posts_updated_at ON posts(updated_at);
 
 -- Insert users
 INSERT INTO users (first_name, last_name, email, password) VALUES

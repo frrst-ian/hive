@@ -20,13 +20,14 @@ const assetsPath = path.join(__dirname, "public");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.use(session({ 
-  secret: 'cats', 
-  resave: false, 
+app.use(session({
+  secret: 'cats',
+  resave: false,
   saveUninitialized: false,
   store: new pgSession({
     conString: process.env.DB_URL,
-    createTableIfMissing: true
+    createTableIfMissing: true,
+    ssl: { rejectUnauthorized: false }
   })
 }));
 app.use(passport.session());
@@ -41,7 +42,7 @@ app.use("/sign-up", signUpRouter);
 app.use("/membership", membershipRouter);
 app.use("/new-message", newMessageRouter);
 app.use("/admin", adminRouter);
-  
+
 app.post(
   "/log-in",
   passport.authenticate("local", {
