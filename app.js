@@ -25,7 +25,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: new pgSession({
-    conString: process.env.DB_URL,
+    pool: pool,
     createTableIfMissing: true,
     ssl:true
   })
