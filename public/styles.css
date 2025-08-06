@@ -147,6 +147,11 @@ section {
 main.login,
 .wrapper {
   background-image: var(--bg-mobile);
+  height: 100vh;
+}
+
+p.fall-back-msg.login {
+  text-align: center;
 }
 
 .title {
@@ -356,10 +361,10 @@ span.blur-name {
 }
 
 p.desc {
-    margin-top: 1rem;
-    text-align: center;
-    font-size: 0.8rem;
-    font-style: italic;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-style: italic;
 }
 
 .msg-2 {
@@ -401,6 +406,7 @@ body {
 input.checkbox-menu[type="checkbox"] {
   display: none;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 input.checkbox-menu[type="checkbox"]:checked ~ div.menu-block {
@@ -529,6 +535,7 @@ nav.desktop {
   main.login,
   .wrapper {
     background-image: var(--bg-desktop);
+    height: 100vh;
   }
 
   .form-container {
@@ -583,7 +590,7 @@ nav.desktop {
 
   p.desc {
     font-size: 1em;
-}
+  }
 
   /* New Message Form */
   textarea {

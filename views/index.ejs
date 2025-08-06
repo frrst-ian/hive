@@ -141,7 +141,7 @@
             </div>
           </div>
           <% } else { %>
-            <!-- Basic user -->
+          <!-- Basic user -->
           <div class="msg-card">
             <div class="msg-body">
               <div class="msg-title-wrapper">
@@ -193,6 +193,9 @@
             </form>
             <p class="desc">Hive is a members only club, join now and share your thoughts!</p>
             <p class="subtitle">Hive members messages:</p>
+            <% if (messages.length === 0) { %>
+            <p class="fall-back-msg login">No messages at this moment.</p>
+            <% } %>
             <div class="msg-cards">
               <% messages.forEach(msg => { %>
               <div class="msg-card">
