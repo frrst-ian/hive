@@ -5,6 +5,7 @@ const flash = require('connect-flash');
 const session = require("express-session");
 const pgSession = require('connect-pg-simple')(session);
 const passport = require('./config/passport');
+const pool = require('./db/pool');
 const PORT = process.env.PORT || 3000;
 
 // Define routers
@@ -26,8 +27,7 @@ app.use(session({
   saveUninitialized: false,
   store: new pgSession({
     pool: pool,
-    createTableIfMissing: true,
-    ssl:true
+    createTableIfMissing: true
   })
 }));
 app.use(passport.session());
