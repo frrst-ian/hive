@@ -27,7 +27,7 @@ app.use(session({
   store: new pgSession({
     conString: process.env.DB_URL,
     createTableIfMissing: true,
-    ssl: { rejectUnauthorized: false }
+    ssl:true
   })
 }));
 app.use(passport.session());
