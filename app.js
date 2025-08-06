@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("node:path");
 const flash = require('connect-flash');
 const session = require("express-session");
+const pgSession = require('connect-pg-simple')(session);
 const passport = require('./config/passport');
 const PORT = process.env.PORT || 3000;
 
@@ -19,7 +20,15 @@ const assetsPath = path.join(__dirname, "public");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: false }));
+app.use(session({ 
+  secret: 'cats', 
+  resave: false, 
+  saveUninitialized: false,
+  store: new pgSession({
+    conString: process.env.DB_URL,
+    createTableIfMissing: true
+  })
+}));
 app.use(passport.session());
 app.use(flash());
 
