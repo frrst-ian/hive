@@ -147,7 +147,6 @@ section {
 main.login,
 .wrapper {
   background-image: var(--bg-mobile);
-  height: 100vh;
 }
 
 p.fall-back-msg.login {
@@ -535,7 +534,6 @@ nav.desktop {
   main.login,
   .wrapper {
     background-image: var(--bg-desktop);
-    height: 100vh;
   }
 
   .form-container {
