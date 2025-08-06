@@ -10,11 +10,11 @@
 </head>
 
 <body>
-  <main class="form">
+  <main class="form login">
     <section class="signup-page">
       <div class="form-container">
         <p class="title">Join Hive</p>
-        <form class="form" action="/sign-up" method="POST">
+        <form class="form login" action="/sign-up" method="POST">
           <div class="input-group">
             <label for="firstName">First Name</label>
             <input type="text" id="firstName" name="firstName" placeholder="" value="<%= typeof formData !== 'undefined' ? formData.firstName: ''%>" required />

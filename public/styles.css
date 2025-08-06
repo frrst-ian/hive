@@ -73,6 +73,8 @@ h6 {
   --primary: #f9ff62;
   --secondary: #00a55e;
   --accent: #3aaf08;
+  --bg-desktop: linear-gradient(135deg, #4bb898 6%, #183a47 20%);
+  --bg-mobile: linear-gradient(135deg, #4bb898 2%, #183a47 10%);
 }
 
 body {
@@ -131,12 +133,20 @@ section {
   grid-template-rows: auto 1fr auto;
 }
 
+.form-container.login {
+  background-image: var(--bg-mobile);
+}
+
 /* Log in page */
 .form-container {
-  width: 20rem;
-  border-radius: 0.75rem;
-  background-color: var(--background);
+  width: 100%;
   padding: 2rem;
+}
+
+.form-container.login,
+main.login,
+.wrapper {
+  background-image: var(--bg-mobile);
 }
 
 .title {
@@ -146,10 +156,6 @@ section {
   font-weight: 700;
   color: var(--text);
   margin-bottom: 1rem;
-}
-
-.form {
-  margin-top: 1.5rem;
 }
 
 .input-group {
@@ -208,6 +214,7 @@ section {
 
 .msg-cards.admin-msg-card {
   width: 300px;
+  margin-bottom: 1rem;
 }
 
 .msg-card {
@@ -336,7 +343,23 @@ span.blur-name {
 
 .join-lnk {
   text-decoration: none;
-  color: var(--accent);
+  margin-top: 0.8rem;
+  display: block;
+  width: 110%;
+  background-color: var(--secondary);
+  padding: 0.62rem;
+  text-align: center;
+  color: var(--text);
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+}
+
+p.desc {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    font-style: italic;
 }
 
 .msg-2 {
@@ -370,7 +393,8 @@ body {
   height: 100%;
 }
 
-.show-menu , .del-btn{
+.show-menu,
+.del-btn {
   cursor: pointer;
 }
 
@@ -411,13 +435,12 @@ ul.navUL {
 
 ul.navUL li {
   display: inline-block;
-  padding: 0px 5px;
+  padding: 0px 4px;
 }
 
 ul.navUL li a {
-  color: #b5b4a6;
+  color: var(--text);
   display: block;
-  padding: 3px;
   text-decoration: none;
 }
 
@@ -436,7 +459,6 @@ footer {
   background-color: #1a1a18;
   display: grid;
   place-items: center;
-  margin-top: 1rem;
 }
 
 /* Bee svg */
@@ -446,8 +468,8 @@ svg#Layer_1 {
 }
 
 .msg-title-wrapper {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 nav.desktop {
@@ -503,9 +525,15 @@ nav.desktop {
     }
   }
 
+  .form-container.login,
+  main.login,
+  .wrapper {
+    background-image: var(--bg-desktop);
+  }
+
   .form-container {
-    margin-top: 30px;
     width: 100%;
+    border-radius: 0px;
   }
 
   p.title {
@@ -552,6 +580,10 @@ nav.desktop {
     font-weight: 600;
     text-align: center;
   }
+
+  p.desc {
+    font-size: 1em;
+}
 
   /* New Message Form */
   textarea {

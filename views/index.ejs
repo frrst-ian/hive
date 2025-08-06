@@ -41,7 +41,6 @@
           <ul class="navUL">
             <li><a href="/new-message">New message</a></li>
             <% if(locals.user.membership_status !== 'admin' && locals.user.membership_status !== 'premium') { %>
-            <li><a href="/membership">Join hive</a></li>
             <li> <a href="/admin">Admin login </a></li>
             <% } %>
             <% if(locals.user.membership_status === 'premium') { %>
@@ -86,7 +85,7 @@
         <% } %>
         <% if( locals.user.membership_status === 'basic') { %>
         <p class="membership-msg">You're a basic user</p>
-        <p class="msg-2"><a class="join-lnk" href="/membership">Join hive</a> to view message author</p>
+        <p class="msg-2"><a class="join-lnk" href="/membership">Join hive</a></p>
         <% } %>
         <% if (messages.length === 0) { %>
         <p class="fall-back-msg">No messages at this moment.</p>
@@ -142,6 +141,7 @@
             </div>
           </div>
           <% } else { %>
+            <!-- Basic user -->
           <div class="msg-card">
             <div class="msg-body">
               <div class="msg-title-wrapper">
@@ -158,6 +158,7 @@
             <div class="footer">
               <p class="name">from: @<span class="blur-name"><%=author %></span>
             </div>
+            <small>To view the author you need to join hive premium.</small>
             </p>
           </div>
           <% } %>
@@ -165,7 +166,7 @@
           <% } else { %>
         </div>
         <section>
-          <div class="form-container">
+          <div class="form-container login">
             <p class="title">Login</p>
             <form class="form" action="/log-in" method="POST">
               <div class="login-group">
@@ -190,6 +191,7 @@
                 </p>
               </div>
             </form>
+            <p class="desc">Hive is a members only club, join now and share your thoughts!</p>
             <p class="subtitle">Hive members messages:</p>
             <div class="msg-cards">
               <% messages.forEach(msg => { %>
