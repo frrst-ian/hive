@@ -22,7 +22,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(session({
-  secret: 'cats',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: new pgSession({
@@ -36,7 +36,7 @@ app.use(flash());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(assetsPath));
 
-// Define middleware functions
+// Define route handlers
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/membership", membershipRouter);
