@@ -24,7 +24,7 @@ Click here: [https://hive-ohwf.onrender.com/](https://hive-ohwf.onrender.com/)
 
 <div align='center'>
 <img src='/public/282shots_so.png' alt='Screenshot of desktop design'>
-<img src='/public/246shots_so.png' alt='Screenshot of mobile design'>
+<img src='/public/329shots_so.png' alt='Screenshot of mobile design'>
 </div>
 
 ## Features
