@@ -8,7 +8,6 @@ const passport = require('./config/passport');
 const pool = require('./db/pool');
 const PORT = process.env.PORT || 3000;
 
-// Define routers
 const indexRouter = require("./routes/index");
 const signUpRouter = require("./routes/signUp");
 const membershipRouter = require("./routes/membership");
@@ -36,7 +35,6 @@ app.use(flash());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(assetsPath));
 
-// Define route handlers
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/membership", membershipRouter);
